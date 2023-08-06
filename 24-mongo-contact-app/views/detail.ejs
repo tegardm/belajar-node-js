@@ -1,0 +1,35 @@
+<%- include("layouts/header") %>
+<%- include("layouts/nav") %>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-3">
+            <% if (!contact) { %>
+                <div class="alert alert-danger fw-bold" role="alert">
+                   Maaf Data Kontak Tidak Ada<br> <a href="/contact" 
+                   class="alert-link fw-normal">&laquo; Silahkan Kembali</a>
+                  </div>
+            <% }  else {%>
+                <h2>Detail Kontak</h2>
+                <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title"><%- contact.nama %></h5>
+                  <h6 class="card-subtitle mb-2 text-body-secondary"><%- contact.nohp %></h6>
+                  <p class="card-text"><%- contact.email %></p>
+                  <a href="/contact/edit/<%- contact.nama %>" class="btn btn-primary badge" 
+                    >Edit Contact</a>
+                  <!-- <a href="/contact/delete/<%- contact.nama %>" class="btn btn-danger badge" 
+                    onclick="return confirm('Yakin ingin menghapus ?')" >Hapus Contact</a> -->
+                    <form action="/contact?_method=DELETE" method="POST" class="d-inline">
+                      <input type="hidden" name="nama" value="<%- contact.nama %>">
+                      <button   onclick="return confirm('Yakin ingin menghapus ?')" type="submit" class="btn btn-danger badge"> Hapus </button>
+                    </form> 
+                  <a href="/contact" class="card-link d-block mt-3">&laquo; Kembali Ke Daftar Kontak</a>
+                </div>
+              </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<%- include("layouts/footer") %>
